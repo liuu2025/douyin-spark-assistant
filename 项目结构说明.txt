@@ -1,4 +1,10 @@
 douyin-spark-assistant/
+  README.md                   # 项目说明、运行链路和本地启动说明
+  CHANGELOG.md                # 版本说明
+  Dockerfile                  # 生产 Docker 镜像
+  requirements_deploy.txt     # 生产运行依赖
+  .env.example                # 可公开配置模板，复制为 .env 后填写真实配置
+
   app/
     main.py                    # FastAPI 入口，提供健康检查、聊天、流式聊天和会话接口
     config.py                  # 读取 .env 和环境变量

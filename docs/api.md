@@ -2,6 +2,8 @@
 
 本文档说明 `douyin-spark-assistant` 对外提供的 HTTP 接口。
 
+当前版本：`v0.9.0`，配套 `douyin-spark v0.9.0` 和 `douyin-spark-client v0.9.0`。
+
 FastAPI 自动接口文档也可以直接查看：
 
 ```text
@@ -29,6 +31,8 @@ http://localhost:8080/api/v1/assistant/...
 ```
 
 Go 后端会把 `/api/v1/assistant/...` 转发到 assistant。
+
+正式前端接入推荐走 Go 后端代理，不推荐浏览器直接访问 assistant。assistant 直连接口主要用于本地调试、脚本测试、Docker 健康检查和 Go 后端内部代理。
 
 ## 鉴权和用户身份
 

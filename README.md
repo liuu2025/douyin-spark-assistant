@@ -4,6 +4,25 @@
 
 它不是单纯的知识库问答。它会同时使用普通用户知识库、RAG 检索、LangChain/LangGraph Agent、内部只读工具和 douyin-spark 后端实时状态，帮助用户理解当前账号、抖音号、登录状态、发送任务、兑换码、轮次和运行记录等问题。
 
+当前版本：`v0.9.0`。
+
+配套版本：
+
+```text
+douyin-spark           v0.9.0
+douyin-spark-client    v0.9.0
+douyin-spark-assistant v0.9.0
+```
+
+配套仓库：
+
+```text
+https://github.com/liuu2025/douyin-spark
+https://github.com/liuu2025/douyin-spark-client
+```
+
+说明：`douyin-spark` 和 `douyin-spark-client` 可能是私有仓库，没有权限的人无法打开；本仓库只保存可公开的 assistant 源码、知识库模板、文档和部署依赖说明。
+
 项目文档只给维护者和开发者看。普通用户知识库只放在 `knowledge/user/`，不要把接口、部署、数据库、开发说明写进普通用户知识库。
 
 ## 当前能力
@@ -89,6 +108,8 @@ storage/
   vectorstore/               Chroma 向量库
   assistant_checkpoints.sqlite LangGraph 会话状态
   assistant_uvicorn.*.log    本地服务日志
+
+CHANGELOG.md                  版本说明
 ```
 
 ## 环境变量
@@ -165,6 +186,16 @@ OpenAPI JSON：
 ```text
 http://localhost:8000/openapi.json
 ```
+
+浏览器前端不直接调用 assistant。正式链路是：
+
+```text
+douyin-spark-client
+  -> douyin-spark /api/v1/assistant/...
+  -> douyin-spark-assistant
+```
+
+直接访问 `http://localhost:8000` 主要用于本地调试、健康检查和脚本测试。
 
 ## 知识库入库
 
