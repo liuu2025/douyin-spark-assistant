@@ -1,0 +1,30 @@
+douyin-spark-assistant/
+  app/
+    main.py                    # FastAPI 入口，提供健康检查、聊天、流式聊天和会话接口
+    config.py                  # 读取 .env 和环境变量
+    schemas.py                 # API 请求和响应结构
+    prompts/
+      assistant_system.txt     # 智能客服系统提示词
+    services/
+      agent_service.py         # LangChain/LangGraph Agent 主流程
+      assistant_service.py     # 聊天模型、Embedding 和系统提示词配置
+      douyin_api_client.py     # 调用 douyin-spark 后端的内部 API Client
+      rag_service.py           # 知识库向量检索
+    tools/
+      douyin_tools.py          # Agent 内部只读工具
+      __init__.py
+
+  knowledge/
+    user/                      # 普通用户知识库 Markdown 文档
+
+  scripts/
+    ingest_knowledge.py        # 知识库入库脚本
+    test_retrieval.py          # 知识库检索测试
+    test_agent_tools.py        # 内部工具测试
+    test_agent_decision.py     # 工具定义和调用结果检查
+    test_agent_answer.py       # Agent 回答测试
+
+  storage/
+    vectorstore/               # Chroma 向量库
+    assistant_checkpoints.sqlite # LangGraph 会话状态
+    assistant_uvicorn.*.log    # 本地 assistant 服务日志

@@ -1,0 +1,35 @@
+# 环境变量文件，里面可能包含真实 API Key、模型地址和私有配置
+.env
+.env.*
+!.env.example
+
+# 运行时数据、会话数据库、日志和生成的向量库
+storage/
+
+# 本地 agent / IDE / 评估缓存
+.agents/
+.jbeval/
+.idea/
+.vscode/
+
+# 临时部署文件和压缩包
+.tmp/
+*.tar
+*.tar.gz
+*.zip
+
+# Python 缓存和测试缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Python 虚拟环境
+.venv/
+venv/
+env/
+
+# 系统文件
+.DS_Store
+Thumbs.db
