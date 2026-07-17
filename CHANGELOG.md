@@ -2,6 +2,21 @@
 
 本文档记录 `douyin-spark-assistant` 智能客服服务的版本变化。
 
+## v0.9.1 - 2026-07-17
+
+本版本为智能客服服务文档补丁版本，配套 `douyin-spark v0.9.1` 和 `douyin-spark-client v0.9.1`。Agent 运行代码、依赖文件和接口行为无变化。
+
+### 文档与部署
+
+- 新增 Agent Docker 部署说明，记录 `douyin-spark-assistant:local` 镜像、`python:3.12-slim` 基础镜像、`requirements_deploy.txt`、`.env`、`knowledge/` 和 `storage/` 的部署边界。
+- 新增本地 Docker Agent 模块容器启动教程，覆盖镜像构建、容器创建或重建、健康检查、知识库入库、三端联调和常见问题处理。
+- 补充本机 Docker 与服务器 Docker 中访问 Go 后端地址的差异说明。
+- 将环境变量示例中的模型密钥改为公开占位符，避免误把真实 `.env` 内容写入公开文档。
+
+### 已验证
+
+- 本次仅修改文档，未修改 Python 运行代码、依赖文件或知识库内容。
+
 ## v0.9.0 - 2026-07-17
 
 本版本为 `douyin-spark-assistant` 首次正式发布版本，配套 `douyin-spark v0.9.0` 和 `douyin-spark-client v0.9.0`。该服务作为独立 Python/FastAPI Agent 模块，为 douyin-spark 普通用户提供知识库问答、实时状态解释、内部工具检查和智能客服会话能力。
