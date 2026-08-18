@@ -2,6 +2,29 @@
 
 本文档记录 `douyin-spark-assistant` 智能客服服务的版本变化。
 
+## v0.9.2 - 2026-08-18
+
+本版本迁移智能客服知识库 Embedding 配置，替换已经不可用的旧 Embedding 中转站。
+
+### 改进
+
+- 将 Embedding 配置从 `ZETATECHS_*` 切换为 `SILICONFLOW_*`。
+- 新增 `EMBEDDING_MODEL` 环境变量，默认使用 `Qwen/Qwen3-Embedding-0.6B`。
+- 知识库向量库重建为 `1024` 维。
+- Chroma collection 新增 `hnsw:space=cosine` 配置，用于 Qwen3 Embedding 检索。
+- 入库脚本和检索测试脚本修复 Windows 控制台 UTF-8 输出问题。
+- 检索测试脚本重写为干净 UTF-8 文本，方便后续回归。
+
+### 部署
+
+- 服务器只重建 `douyin-spark-assistant` 容器。
+- 服务器保留 `knowledge/` 和 `assistant_checkpoints.sqlite`，仅备份并重建 `storage/vectorstore`。
+- 服务器重建后验证 collection 为 `douyin_user_knowledge`、`1024` 维、`109` 条向量、`hnsw:space=cosine`。
+
+### 注意
+
+- `Qwen/Qwen3-Embedding-0.6B` 已完成链路迁移，但短问题检索排序仍需线上观察；如召回不稳，优先评估 `Qwen/Qwen3-Embedding-4B` 后重新入库。
+
 ## v0.9.1 - 2026-07-17
 
 本版本为智能客服服务文档补丁版本，配套 `douyin-spark v0.9.1` 和 `douyin-spark-client v0.9.1`。Agent 运行代码、依赖文件和接口行为无变化。

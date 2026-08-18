@@ -34,10 +34,15 @@ def get_embeddings():
     Embedding 用来把文本转成向量。
     入库和检索必须使用同一类 Embedding，检索结果才稳定。
     """
+    if not settings.SILICONFLOW_API_KEY:
+        raise RuntimeError("SILICONFLOW_API_KEY is not configured")
+    if not settings.SILICONFLOW_BASE_URL:
+        raise RuntimeError("SILICONFLOW_BASE_URL is not configured")
+
     return OpenAIEmbeddings(
-        model="text-embedding-3-small",
-        api_key=settings.ZETATECHS_API_KEY,
-        base_url=settings.ZETATECHS_BASE_URL,
+        model=settings.EMBEDDING_MODEL,
+        api_key=settings.SILICONFLOW_API_KEY,
+        base_url=settings.SILICONFLOW_BASE_URL,
     )
 
 
@@ -91,4 +96,3 @@ def default_system_prompt() -> str:
 6. 遇到页面、状态或按钮，要说明它在哪里、什么时候点、点了之后会发生什么。
 7. 不承诺发送一定成功。
 """.strip()
-

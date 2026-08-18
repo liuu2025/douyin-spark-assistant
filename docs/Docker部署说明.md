@@ -152,8 +152,9 @@ DEEPSEEK_API_KEY=<your-chat-model-api-key>
 DEEPSEEK_BASE_URL=<your-chat-model-base-url>
 CHAT_MODEL=deepseek-v4-flash
 
-ZETATECHS_API_KEY=<your-embedding-api-key>
-ZETATECHS_BASE_URL=<your-embedding-base-url>
+SILICONFLOW_API_KEY=<your-siliconflow-api-key>
+SILICONFLOW_BASE_URL=https://api.siliconflow.cn/v1
+EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
 
 DOUYIN_SPARK_API_BASE_URL=http://host.docker.internal:8787/api/v1
 
@@ -186,8 +187,8 @@ DOUYIN_SPARK_API_BASE_URL=http://douyin-spark:8787/api/v1
 CHAT_MODEL
   只影响聊天模型。
 
-ZETATECHS_API_KEY、ZETATECHS_BASE_URL
-  用于 Embedding 和知识库向量检索。
+SILICONFLOW_API_KEY、SILICONFLOW_BASE_URL、EMBEDDING_MODEL
+  用于 Embedding 和知识库向量检索。更换 Embedding 模型后，必须清空对应的 vectorstore 并重新入库。
 ```
 
 ## 六、本地容器部署

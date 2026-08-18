@@ -19,6 +19,16 @@ import sys
 import shutil
 from pathlib import Path
 
+
+def configure_console_encoding():
+    """Keep emoji/status output from crashing Windows GBK consoles."""
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
+
+configure_console_encoding()
+
 # 将项目根目录加入 sys.path，确保可以 import app
 # __file__ 是当前脚本路径，例如 scripts/ingest_knowledge.py
 # parent.parent 表示回到项目根目录
@@ -34,7 +44,10 @@ from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_text_splitters import MarkdownHeaderTextSplitter, RecursiveCharacterTextSplitter
 
 # Chroma: LangChain 封装的 Chroma 向量库客户端
-from langchain_community.vectorstores import Chroma
+try:
+    from langchain_chroma import Chroma
+except ImportError:
+    from langchain_community.vectorstores import Chroma
 
 # settings: 项目配置对象，包含知识库目录、Chroma 持久化目录等
 from app.config import settings
@@ -49,6 +62,7 @@ RESET_VECTORSTORE = True
 
 # Chroma collection 名称
 COLLECTION_NAME = "douyin_user_knowledge"
+COLLECTION_METADATA = {"hnsw:space": "cosine"}
 
 
 def load_markdown_documents():
@@ -233,11 +247,13 @@ def build_vectorstore(chunks):
         embedding=embeddings,
         persist_directory=settings.CHROMA_PERSIST_DIR,
         collection_name=COLLECTION_NAME,
+        collection_metadata=COLLECTION_METADATA,
     )
 
     print("🎉 向量库创建成功")
     print(f"   - 存储目录：{settings.CHROMA_PERSIST_DIR}")
     print(f"   - collection：{COLLECTION_NAME}")
+    print(f"   - 相似度空间：{COLLECTION_METADATA['hnsw:space']}")
 
     return vectorstore
 

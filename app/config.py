@@ -30,8 +30,12 @@ class Settings:
     CHAT_MODEL: str = os.getenv("CHAT_MODEL", "deepseek-v4-flash")
 
     # Embedding 接口配置。入库和检索要使用同一套 Embedding 配置。
-    ZETATECHS_API_KEY = os.getenv("ZETATECHS_API_KEY")
-    ZETATECHS_BASE_URL = os.getenv("ZETATECHS_BASE_URL")
+    SILICONFLOW_API_KEY = os.getenv("SILICONFLOW_API_KEY")
+    SILICONFLOW_BASE_URL = os.getenv("SILICONFLOW_BASE_URL")
+    EMBEDDING_MODEL: str = os.getenv(
+        "EMBEDDING_MODEL",
+        "Qwen/Qwen3-Embedding-0.6B",
+    )
 
     # douyin-spark 后端 API 地址。
     # assistant 会带用户 token 调这里，查询用户自己的账号状态。

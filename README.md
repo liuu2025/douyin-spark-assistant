@@ -4,15 +4,17 @@
 
 它不是单纯的知识库问答。它会同时使用普通用户知识库、RAG 检索、LangChain/LangGraph Agent、内部只读工具和 douyin-spark 后端实时状态，帮助用户理解当前账号、抖音号、登录状态、发送任务、兑换码、轮次和运行记录等问题。
 
-当前版本：`v0.9.0`。
+当前版本：`v0.9.2`。
 
 配套版本：
 
 ```text
-douyin-spark           v0.9.0
-douyin-spark-client    v0.9.0
-douyin-spark-assistant v0.9.0
+douyin-spark           v0.9.2
+douyin-spark-client    v0.9.1
+douyin-spark-assistant v0.9.2
 ```
+
+说明：`v0.9.2` 是 assistant-only 补丁版本，仅更换知识库 Embedding 模型和向量库配置；对后端代理接口和前端调用方式无变更。
 
 配套仓库：
 
@@ -125,8 +127,9 @@ DEEPSEEK_API_KEY=你的聊天模型密钥
 DEEPSEEK_BASE_URL=聊天模型 OpenAI 兼容地址
 CHAT_MODEL=deepseek-v4-flash
 
-ZETATECHS_API_KEY=你的 Embedding 密钥
-ZETATECHS_BASE_URL=Embedding OpenAI 兼容地址
+SILICONFLOW_API_KEY=你的 SiliconFlow Embedding 密钥
+SILICONFLOW_BASE_URL=https://api.siliconflow.cn/v1
+EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
 
 DOUYIN_SPARK_API_BASE_URL=http://localhost:8787/api/v1
 
@@ -143,7 +146,8 @@ ASSISTANT_SUMMARY_KEEP_FRACTION=0.40
 说明：
 
 - `CHAT_MODEL` 只影响聊天模型，不影响 Embedding。
-- `ZETATECHS_*` 用于知识库入库和检索。
+- `SILICONFLOW_*` 和 `EMBEDDING_MODEL` 用于知识库入库和检索。
+- 当前默认模型为 `Qwen/Qwen3-Embedding-0.6B`，返回 `1024` 维向量。
 - `DOUYIN_SPARK_API_BASE_URL` 是 assistant 调 douyin-spark 后端的地址。
 - `ASSISTANT_CONTEXT_MAX_INPUT_TOKENS` 是本项目控制会话压缩的有效上下文预算。
 - `ASSISTANT_SUMMARY_TRIGGER_FRACTION` 默认 `0.75`，表示上下文达到预算 75% 时触发总结。

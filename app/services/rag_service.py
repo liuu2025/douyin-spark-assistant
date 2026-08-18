@@ -27,6 +27,7 @@ from app.config import settings
 
 # 和入库脚本里的 collection_name 保持一致。
 COLLECTION_NAME = "douyin_user_knowledge"
+COLLECTION_METADATA = {"hnsw:space": "cosine"}
 
 
 @lru_cache(maxsize=1)
@@ -50,6 +51,7 @@ def get_vectorstore() -> Chroma:
         persist_directory=settings.CHROMA_PERSIST_DIR,
         embedding_function=embeddings,
         collection_name=COLLECTION_NAME,
+        collection_metadata=COLLECTION_METADATA,
     )
 
 
